@@ -1,6 +1,12 @@
 import MenuItem from '../models/menuItem.model.js';
 export default async function (req, res) {
     try {
+        if(req.role === 'user'){
+            return res.status(400).json({
+              success: false,
+              message: `Access denied, only administrators can perform this action`,
+            })
+        }
         const { id } = req.params;
         const { name, category, price, availability } = req.body;
         const menuItem = await MenuItem.findByIdAndUpdate(id, {

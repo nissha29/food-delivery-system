@@ -38,6 +38,7 @@ export default async function(req, res){
         const user = await User.create({
             username,
             password: hashedPassword,
+            role: req.body.role,
         })
         const token = generateJWT(user._id, "15d");
 
@@ -57,6 +58,7 @@ export default async function(req, res){
             success: true,
             message: 'You are registered successfully',
             token: token,
+            user
         })
     } catch (err) {
         return res.status(500).json({ 

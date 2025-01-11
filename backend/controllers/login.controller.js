@@ -60,7 +60,8 @@ export default async function (req, res) {
         .json({
           success: true,
           message: "You are logged in successfully",
-          token
+          token,
+          user
         });
     } catch (err) {
         res.status(400).json({ 
