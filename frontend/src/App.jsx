@@ -1,14 +1,10 @@
 import React from 'react';
-import Navbar from './components/Navbar.jsx';
-import HeroSection from './components/HeroSection.jsx';
-import FooterSection from './components/FooterSection.jsx';
+import Routing from './Routes/Routing.jsx';
 
 function App() {
   return (
-    <div className="min-h-screen bg-white">
-      <Navbar />
-      <HeroSection />
-      <FooterSection />
+    <div>
+      <Routing/>
     </div>
   );
 }

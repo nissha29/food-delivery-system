@@ -1,32 +1,62 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import Register from './Register';
 import axios from 'axios';
 import URL from '../../constant.js'
+import { useNavigate } from 'react-router-dom';
+import { AuthContext } from "../Context/AuthContext.jsx";
+import { AlertTriangle } from 'lucide-react';
 
 const Login = ({ onClose }) => {
+  const { signIn } = useContext(AuthContext); 
+  const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const [formData, setFormData] = useState({
     username: '',
     password: '',
   })
+  const [error, setError] = useState('');
 
-  async function handleChange(e){
-    setFormData([
+  function handleChange(e){
+    setError('');
+    setFormData({
         ...formData,
-        [e.target.username] = e.target.value
-    ])
+        [e.target.name]: e.target.value
+  })
   }
-  async function handleSubmit(){
+  async function handleSubmit(e){
     e.preventDefault();
+    setError('');
     try{
         const response = await axios.post(
             `${URL}/api/auth/login`,
             formData,
             {
-                withCredentials: true,
+              withCredentials: true,
             }
-            
         )
+        let username = response.data.user.username;
+        let password = response.data.user.password;
+        
+        signIn({
+          username,
+          password
+        })
+        const role = response.data.user.role;
+        if(role === 'admin'){
+          navigate("/admin", {
+            state: {
+              username: username,
+              password: password
+            }
+          })
+        }else{
+          navigate("/home", {
+            state: {
+              username: username,
+              password: password
+            }
+          })
+        }
     }catch(err){
         if (err.response) {
             if (err.response.status === 404) {
@@ -51,9 +81,16 @@ const Login = ({ onClose }) => {
             ✕
           </button>
         </div>
-        
+        {error && (
+                <div
+                  className="flex items-center bg-[#ff9b9b5b] border border-red-950 text-red-950 p-3 rounded-md mb-6 space-x-2 font-playwrite"
+                  >
+                  <AlertTriangle className="text-red-950" size={20} />
+                  <p className="text-sm">{error}</p>
+                </div>
+        )}
     
-        <form className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label className="block text-gray-700 mb-2">Username</label>
             <input
@@ -82,7 +119,6 @@ const Login = ({ onClose }) => {
             />
           </div>
           <button
-            onClick={handleSubmit}
             type="submit"
             className="w-full bg-primary text-white py-2 rounded hover:bg-yellow-500 transition-colors duration-200"
           >

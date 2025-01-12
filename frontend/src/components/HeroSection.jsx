@@ -4,10 +4,10 @@ import deliveryGuy from '../assets/DeliveryGuy.png'
 
 const HeroSection = () => {
   return (
-    <div className="w-full min-h-screen lg:px-16 sm:px-6 px-4 py-8 sm:py-12 lg:py-16 mt-24 font-merriweather">
+    <div className="w-full min-h-screen lg:px-16 sm:px-6 px-4 mt-24 pt-20 font-merriweather">
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-12">
-          {/* Left Content */}
+          
           <div className="w-full lg:w-1/2 space-y-6">
             <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-semibold text-secondary leading-tight">
               Order Your Best
@@ -60,7 +60,6 @@ const HeroSection = () => {
             </div>
           </div>
           
-          {/* Right Content - Image */}
           <div className="w-full lg:w-1/2 pt-6">
             <img
               src={deliveryGuy}
