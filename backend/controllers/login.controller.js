@@ -50,9 +50,9 @@ export default async function (req, res) {
             sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
             httpOnly: true,
             secure: process.env.NODE_ENV === 'production',
-            domain: process.env.NODE_ENV === 'production' ? process.env.DOMAIN : 'localhost',
+            ...(process.env.NODE_ENV === 'production' && { domain: process.env.DOMAIN }),
             path: '/',
-        };
+        };        
 
         return res
         .cookie('token', token, cookieOptions)
