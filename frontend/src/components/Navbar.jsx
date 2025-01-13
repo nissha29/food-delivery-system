@@ -1,12 +1,7 @@
 import React, { useState } from 'react';
 import Login from './Login';
 import { ShoppingBag } from 'lucide-react'
-
-const NavLink = ({ href, children }) => (
-  <a href={href} className="text-gray-700 hover:text-gray-900 text-base sm:text-lg transition-colors duration-200">
-    {children}
-  </a>
-);
+import { NavLink } from 'react-router-dom';
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -24,7 +19,7 @@ function Navbar() {
 
       
           <div className="hidden md:flex items-center space-x-3 lg:space-x-8">
-            <NavLink href="#">Home</NavLink>
+            <NavLink to={'/home'}>Home</NavLink>
             <NavLink href="#">Service</NavLink>
             <NavLink href="#">About Us</NavLink>
             <NavLink href="#">Contact Us</NavLink>
@@ -68,7 +63,7 @@ function Navbar() {
           }`}
         >
           <div className="flex flex-col space-y-4 px-2 pb-4">
-            <NavLink href="#">Home</NavLink>
+            <NavLink to={"/home"}>Home</NavLink>
             <NavLink href="#">Service</NavLink>
             <NavLink href="#">About Us</NavLink>
             <NavLink href="#">Contact Us</NavLink>
