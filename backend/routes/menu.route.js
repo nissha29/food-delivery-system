@@ -11,7 +11,7 @@ const menuRouter = express.Router();
 
 menuRouter.get('/', getMenuItems);
 menuRouter.post('/', auth, isAdmin, upload.single('image'),addMenuItem);
-menuRouter.patch('/:id', auth, isAdmin, updateMenuItem);
+menuRouter.patch('/:id', auth, isAdmin, upload.single('image'), updateMenuItem);
 menuRouter.delete('/:id', auth, isAdmin, deleteMenuItem);
 
 export default menuRouter;

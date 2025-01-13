@@ -18,7 +18,8 @@ export default async function (req, res) {
       }
   
       const { name, category, price, availability } = req.body;
-      
+      console.log("hello")
+      console.log(req.body);
       const updateData = {
         name,
         category,

@@ -14,7 +14,7 @@ export default async function(req, res){
       }
       return res.status(200).json({
         success: true,
-        message: `Succesfully fetched youe order history`,
+        message: `Succesfully fetched your order history`,
         orders: orders,
       });
     } catch (error) {

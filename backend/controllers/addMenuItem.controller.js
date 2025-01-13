@@ -11,7 +11,7 @@ const menuItemSchema = z.object({
       mimetype: z.string().refine(val => {
           return ['image/jpeg', 'image/png', 'image/webp'].includes(val);
       }, "Only .jpg, .png and .webp formats are allowed"),
-      size: z.number().refine(val => val <= 5 * 1024 * 1024, "Image size must be less than 5MB")
+      size: z.number().refine(val => val <= 20 * 1024 * 1024, "Image size must be less than 20MB")
   }).required("Image is required")
 });
 
@@ -23,6 +23,7 @@ export default async function(req, res){
         message: `Access denied, only administrators can perform this action`,
       })
     }
+  
     if(!req.file){
       return res.status(400).json({
           success: false,

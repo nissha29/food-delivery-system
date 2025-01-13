@@ -4,7 +4,12 @@ import getTotalAmount  from '../utils/getTotalAmount.util.js';
 export default async function (req, res) {
     try {
         const { items } = req.body;
-        if (!items || !Array.isArray(items) || items.length === 0) {
+        if(items.length === 0) {
+            return res.status(200).json({
+                message: 'No items in the order'
+            });
+        }   
+        if (!items || !Array.isArray(items)) {
             return res.status(400).json({
                 message: 'Invalid request body. Items array is required.'
             });
@@ -19,6 +24,16 @@ export default async function (req, res) {
             });
         }
 
+        const cartItems = menuItems.map(menuItem => {
+            const orderItem = items.find(item => 
+                (item.menuItem._id || item.menuItem) === menuItem._id.toString()
+            );
+            return {
+                ...menuItem.toObject(), 
+                quantity: orderItem.quantity
+            };
+        });
+
         const totalAmount = getTotalAmount(items, menuItems);
 
         const order = new Order({
@@ -30,7 +45,8 @@ export default async function (req, res) {
         return res.status(201).json({
             success: true,
             message: 'Order placed successfully',
-            order
+            menuItems: cartItems,
+            totalAmount,
         });
     } catch (err) {
         return res.status(400).json({

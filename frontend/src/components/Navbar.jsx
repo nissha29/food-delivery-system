@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Login from './Login';
+import { ShoppingBag } from 'lucide-react'
 
 const NavLink = ({ href, children }) => (
   <a href={href} className="text-gray-700 hover:text-gray-900 text-base sm:text-lg transition-colors duration-200">
@@ -16,11 +17,10 @@ function Navbar() {
       <div className="max-w-[1440px] mx-auto">
         <div className="flex justify-between items-center">
       
-          <div className="flex-shrink-0">
-            <span className="text-2xl sm:text-2xl md:text-2xl font-bold text-primary whitespace-nowrap">
-              🥨 FoodieExpress
-            </span>
-          </div>
+        <div className="flex items-center space-x-2">
+              <ShoppingBag className="w-8 h-8 text-[#FFB800]" />
+              <span className="text-2xl font-bold text-[#1E1B4B]">FoodieExpress</span>
+        </div>
 
       
           <div className="hidden md:flex items-center space-x-3 lg:space-x-8">

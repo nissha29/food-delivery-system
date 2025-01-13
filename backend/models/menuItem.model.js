@@ -7,6 +7,7 @@ const menuItemSchema = new mongoose.Schema({
     },
     category: { 
         type: String, 
+        enum: ['Popular', 'Italian', 'Chinese', 'Indian', 'Japanese', 'Fast Food'],
         required: true 
     },
     price: { 
@@ -14,18 +15,13 @@ const menuItemSchema = new mongoose.Schema({
         required: true 
     },
     availability: { 
-        type: Boolean,
-        default: true 
+        type: String,
+        enum: ['In Stock', 'Out of Stock', 'Coming Soon'],
+        default: 'In Stock'
     },
     imageUrl: {
         type: String,
         required: true,
-        validate: {
-            validator: function(v) {
-                return /^https?:\/\/(?:localhost|[\w-]+(?:\.[\w-]+)+)(?::\d+)?\/uploads\/images\/[\w-]+\.(?:jpg|jpeg|png)$/i.test(v);
-            },
-            message: 'Invalid image url'
-        }
     },
 
 });

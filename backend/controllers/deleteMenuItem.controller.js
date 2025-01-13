@@ -8,6 +8,8 @@ export default async function(req, res){
         })
       }
       const { id } = req.params;
+      const exists = await MenuItem.findById(id);
+      console.log('Item exists:', exists);
       const menuItem = await MenuItem.findByIdAndDelete(id);
       if (!menuItem){
         return res.status(404).json({ 
