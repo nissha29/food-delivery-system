@@ -48,7 +48,7 @@ export default async function(req, res){
       name, 
       category, 
       price,
-      imageUrl: `https://${process.env.DOMAIN}/uploads/images/${req.file.filename}`
+      imageUrl: `${process.env.DOMAIN}/uploads/images/${req.file.filename}`
     });
 
     await menuItem.save();
